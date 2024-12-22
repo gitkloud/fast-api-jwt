@@ -9,6 +9,18 @@ directory.  To create the virtualenv it assumes that there is a `python3`
 package. If for any reason the automatic creation of the virtualenv fails,
 you can create the virtualenv manually.
 
+## Pre-Requisites
+1. Python Runtime (python3)
+    ```
+    sudo yum install python3  (redhat)
+    sudo apt install python3 (debain)
+    ```
+2. Python Package manager (pip3)
+    ```
+    sudo yum install python3-pip (redhat)
+    sudo apt install python3-pip (debain)
+    ```
+
 ## Building Procedure
 To manually create a virtualenv on MacOS and Linux:
 
@@ -33,6 +45,8 @@ Once the virtualenv is activated, you can install the required dependencies.
 
 ```
 $ pip install -r requirements.txt
+or
+pip3 install -r requirements.txt
 ```
 
 At this point you are ready to Run the app
@@ -48,7 +62,7 @@ Now, You are ready to Access Your App under http://localhost:8000/
 ```commandline
 curl --location 'localhost:8000/token' \
 --form 'username="admin"' \
---form 'password="<password>"'
+--form 'password="Password@1"'
 ```
 2. Access the apps with bearer token
 ```commandline
