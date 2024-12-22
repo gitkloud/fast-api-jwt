@@ -4,6 +4,7 @@ from starlette.status import HTTP_401_UNAUTHORIZED
 import jwt
 import time
 import uvicorn
+from app.appconfig import app_success_msg
 
 SECRET_KEY = "your_secret_key"
 
@@ -48,10 +49,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 @app.get("/")
 def read_secure_data(token: str = Depends(oauth2_scheme)):
     verify_token(token)
-    return {
-        "message": "Secure data accessed!",
-        "data": "Fetched"
-    }
+    return app_success_msg()
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, log_level="debug")
