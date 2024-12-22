@@ -37,7 +37,7 @@ def verify_token(token: str):
 
 @app.post("/token")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    if form_data.username != "admin" or form_data.password != "Sharath10@":
+    if form_data.username != "admin" or form_data.password != "Password@1":
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
