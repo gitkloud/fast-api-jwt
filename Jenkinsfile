@@ -1,3 +1,5 @@
+properties([parameters([string(defaultValue: '1.0.0', name: 'APP_VERSION')]), pipelineTriggers([])])
+
 pipeline {
     agent any
 
