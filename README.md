@@ -56,6 +56,7 @@ $ python main.py
 ```
 Now, You are ready to Access Your App under http://localhost:8000/
 
+
 ## Usage
 
 1. Generate the Bearer Token
