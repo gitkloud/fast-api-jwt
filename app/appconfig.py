@@ -1,7 +1,7 @@
 def app_success_msg():
     msg = {
-        "message": "Secure data accessed!",
-        "data": "Fetched"
+        "message": "Secure Data Accessed!",
+        "data": "Fetched",
+        "status": "OK"
     }
     return msg
-
