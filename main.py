@@ -1,20 +1,29 @@
+from botocore.exceptions import ClientError
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED
 import jwt
 import time
 import uvicorn
-from app.appconfig import app_success_msg
+import boto3
+from app.appconfig import app_success_msg, user_create_msg
 
 SECRET_KEY = "your_secret_key"
 
 app = FastAPI()
 
+class Item(BaseModel):
+    uid: str
+    username: str
+    fullName: str
+    description: str | None = None
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def create_token(data: dict):
     to_encode = data.copy()
-    expire = time.time() + 30
+    expire = time.time() + 3000
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
 
@@ -50,6 +59,30 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 def read_secure_data(token: str = Depends(oauth2_scheme)):
     verify_token(token)
     return app_success_msg()
+
+@app.post("/user/create")
+def createuser(token: str = Depends(oauth2_scheme), form_data: OAuth2PasswordRequestForm = Depends()):
+    verify_token(token)
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('gk_demo_table')
+    item = Item(
+        uid=form_data.username,  # Assuming uid is the same as username for this example
+        username=form_data.username,
+        fullName=form_data.username,  # Assuming fullName is the same as username for this example
+        description=None  # Assuming description is None for this example
+    )
+    try:
+        response = table.put_item(
+            Item={
+                'id': item.uid,
+                'name': item.username,
+                'fullName': item.fullName,
+                'description': item.description
+            }
+        )
+        return user_create_msg()
+    except ClientError as e:
+        raise HTTPException(status_code=500, detail=f"Error creating item: {e}")
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, log_level="debug")
