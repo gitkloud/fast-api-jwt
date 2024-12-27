@@ -13,7 +13,7 @@ SECRET_KEY = "your_secret_key"
 
 app = FastAPI()
 
-class Item(BaseModel):
+class User(BaseModel):
     uid: str
     username: str
     fullName: str
@@ -65,12 +65,11 @@ def createuser(token: str = Depends(oauth2_scheme), form_data: OAuth2PasswordReq
     verify_token(token)
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('gk_demo_table')
-    item = Item(
-        uid=form_data.username,  # Assuming uid is the same as username for this example
-        username=form_data.username,
-        fullName=form_data.username,  # Assuming fullName is the same as username for this example
-        description=None  # Assuming description is None for this example
-    )
+    item = User()
+    item.uid = form_data.username
+    item.username = form_data.username
+    item.fullName = form_data.username
+    item.description = form_data.password  # Assuming description is passed as password for simplicity
     try:
         response = table.put_item(
             Item={
