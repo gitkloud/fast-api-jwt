@@ -12,48 +12,48 @@ pipeline {
         
         stage('Build' ) {
             steps {
-                    bat '''
-                        echo "::::::::::: Started Build :::::::::::"
-                        python3 -m venv .venv
-                        .venv\Scripts\activate.bat
-                        pip3 install -r requirements.txt
-                        deactivate
-                        echo "::::::::::: Build Success :::::::::::"
-                    '''
+                bat '''
+                    echo "::::::::::: Started Build :::::::::::"
+                    python3 -m venv .venv
+                    .venv\Scripts\activate.bat
+                    pip3 install -r requirements.txt
+                    deactivate
+                    echo "::::::::::: Build Success :::::::::::"
+                '''
                     
             }
         } 
 
         stage('Test' ) {
             steps {
-                    bat '''
-                        echo "::::::::::: Test Started :::::::::::"
-                        echo "Tested Success"
-                        echo "::::::::::: Test Completed :::::::::::"
-                    '''    
+                bat '''
+                    echo "::::::::::: Test Started :::::::::::"
+                    echo "Tested Success"
+                    echo "::::::::::: Test Completed :::::::::::"
+                '''    
                     
             }
         }  
 
         stage('Sonar' ) {
             steps {
-                    bat '''
-                        echo "::::::::::: Sonar Started :::::::::::"
-                        echo "SonarQube Scan Success"
-                        echo "::::::::::: Sonar Completed :::::::::::"
-                    '''
+                bat '''
+                    echo "::::::::::: Sonar Started :::::::::::"
+                    echo "SonarQube Scan Success"
+                    echo "::::::::::: Sonar Completed :::::::::::"
+                '''
                     
             }
         }  
 
         stage('Packaging' ) {
             steps {
-                    bat '''
-                        echo "::::::::::: Packaging App :::::::::::"
-                        rm -rf target/ && mkdir target/
-                        zip -r target/fast-api-jwt-${APP_VERSION}.zip .venv/ app/ main.py
-                        echo "::::::::::: Packaing Completed (fast-api-jwt-${APP_VERSION}.zip) :::::::::::"
-                    '''
+                bat '''
+                    echo "::::::::::: Packaging App :::::::::::"
+                    rm -rf target/ && mkdir target/
+                    zip -r target/fast-api-jwt-${APP_VERSION}.zip .venv/ app/ main.py
+                    echo "::::::::::: Packaing Completed (fast-api-jwt-${APP_VERSION}.zip) :::::::::::"
+                '''
                     
             }
         }  
