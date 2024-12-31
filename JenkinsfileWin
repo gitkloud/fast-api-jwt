@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('git'){
             steps {
-                git branch: 'windows', credentialsId: 'GitHub-Key', url: 'git@github.com:gitkloud/fast-api-jwt.git'
+                git branch: 'main', credentialsId: 'GitHub-Key', url: 'git@github.com:gitkloud/fast-api-jwt.git'
             }
         }
         
