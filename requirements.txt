@@ -3,3 +3,9 @@ uvicorn~=0.31.1
 fastapi~=0.115.2
 starlette~=0.40.0
 python-multipart
+opentelemetry-distro
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-fastapi
+prometheus_client
+opentelemetry-exporter-prometheus
