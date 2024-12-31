@@ -1,12 +1,12 @@
 properties([parameters([string(defaultValue: '1.0.0', name: 'APP_VERSION')]), pipelineTriggers([])])
 
 pipeline {
-    agent win
+    agent any
 
     stages {
         stage('git'){
             steps {
-                git branch: 'windows', credentialsId: 'GitHub-Key', url: 'git@github.com:gitkloud/fast-api-jwt.git'
+                git branch: 'main', credentialsId: 'GitHub-Key', url: 'git@github.com:gitkloud/fast-api-jwt.git'
             }
         }
         
