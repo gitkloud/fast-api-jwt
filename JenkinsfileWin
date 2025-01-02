@@ -58,7 +58,7 @@ pipeline {
             }
         }  
 
-        stage('Build' ) {
+        stage('Publish' ) {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds-dev', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     bat '''
