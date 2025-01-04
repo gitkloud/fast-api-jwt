@@ -49,7 +49,7 @@ pipeline {
         stage('Packaging' ) {
             steps {
                 bat '''
-                    echo "::::::::::: Packaging App :::::::::::"
+                    echo "::::::::::: Packaging App ::::::::::"
                     del target/ && md target/
                     tar.exe target/fast-api-jwt-${APP_VERSION}.zip .venv/ app/ main.py
                     echo "::::::::::: Packaing Completed (fast-api-jwt-${APP_VERSION}.zip) :::::::::::"
