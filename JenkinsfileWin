@@ -50,8 +50,7 @@ pipeline {
             steps {
                 bat '''
                     echo "::::::::::: Packaging App ::::::::::"
-                    md target
-                    zip zipFile: "..//target/fast-api-jwt-${APP_VERSION}.zip", archieve:true, dir: " .venv/ app/ main.py"
+                    jar -cfM /target/fast-api-jwt-${APP_VERSION}.zip .venv/ app/ main.py
                     echo "::::::::::: Packaing Completed (fast-api-jwt-${APP_VERSION}.zip) :::::::::::"
                 '''
                     
