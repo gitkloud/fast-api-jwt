@@ -51,7 +51,7 @@ pipeline {
                 bat '''
                     echo "::::::::::: Packaging App ::::::::::"
                     del target && md target
-                    jar -cfM /target/fast-api-jwt-${APP_VERSION}.zip .venv/ app/ main.py
+                    jar -cfM /target/fast-api-jwt-${APP_VERSION} .venv/ app/ main.py
                     echo "::::::::::: Packaing Completed (fast-api-jwt-${APP_VERSION}.zip) :::::::::::"
                 '''
                     
@@ -63,7 +63,7 @@ pipeline {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds-dev', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     bat '''
                         echo "::::::::::: Publish to Artifactory(s3) :::::::::::"
-                        aws s3 cp target/fast-api-jwt-${APP_VERSION}.zip s3://bpantala-test-bucket/artifacts/fast-api-jwt-${APP_VERSION}.zip
+                        aws s3 cp target/fast-api-jwt-${APP_VERSION} s3://bpantala-test-bucket/artifacts/fast-api-jwt-${APP_VERSION}.zip
                         echo "::::::::::: S3 Publish Done s3://bpantala-test-bucket/artifacts/fast-api-jwt-${APP_VERSION}.zip :::::::::::"
                     '''
                 } 
