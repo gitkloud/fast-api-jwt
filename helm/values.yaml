@@ -66,7 +66,7 @@ ingress:
   hosts:
     - host: fastapi.gitkloud.com
       paths:
-        - path: /
+        - path: (/|$)(.*)
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
